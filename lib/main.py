@@ -13,7 +13,7 @@ import xml.etree.ElementTree as et
 import rich
 from rich.tree import Tree
 
-DRY_RUN = True
+DRY_RUN = False
 
 
 def build(settings):
