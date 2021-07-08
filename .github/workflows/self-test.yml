@@ -17,7 +17,9 @@ jobs:
         with:
           solution: "./TestSolution/TestSolution.sln"
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: inspection.xml
-          path: inspection.xml
+          name: resharper-inspection
+          path: |
+            inspection.xml
+            inspection.txt

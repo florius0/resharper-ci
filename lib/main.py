@@ -92,6 +92,7 @@ def process_inspectcode_output(settings):
     walk_tree(tree(s, key=k), t)
 
     rich.print(t)
+    rich.print(t, file=open('inspection.txt', 'w'))
 
     return len(issues)
 
