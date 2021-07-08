@@ -1,0 +1,23 @@
+name: SelfTest
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    name: Self Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test
+        uses: ./ # Uses the action in the root directory
+        id: test
+        with:
+          solution: "./TestSolution/TestSolution.sln"
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: report.xml
+          path: report.xml

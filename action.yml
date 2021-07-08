@@ -1,0 +1,40 @@
+name: "Resharper CI"
+author: "florius"
+description: "An action that runs the ReSharper inspectcode and dupfinder tools"
+branding:
+  icon: "hash"
+  color: "purple"
+inputs:
+  solution:
+    description: "Path to your solution file, ex: MyProject.sln"
+    required: true
+  severity:
+    description: "Set minimal reported severity level to [INFO, HINT, SUGGESTION, WARNING, ERROR]. Default to WARNING"
+    default: "WARNING"
+    required: false
+  include:
+    description: "Semicolon-separated list of relative paths or wildcards that define the files to include during the inspection"
+    required: false
+  exclude:
+    description: "Semicolon-separated list of relative paths or wildcards that define the files to exclude during the inspection"
+    required: false
+  discard-issues:
+    description: "Semicolon-separated list of IssueType Ids that will be ignored"
+    required: false
+  build:
+    description: "Should project be builded before checks, defaults to true"
+    required: false
+    default: "true"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - '{
+        "solution": "${{ inputs.solution }}",
+        "severity": "${{ inputs.severity }}",
+        "include": "${{ inputs.include }}",
+        "exclude": "${{ inputs.exclude }}",
+        "discard-issues": "${{ inputs.discard-issues }}",
+        "build": "${{ inputs.build }}"
+      }'
