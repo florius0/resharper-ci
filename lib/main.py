@@ -18,7 +18,10 @@ DRY_RUN = False
 
 def build(settings):
     if settings.build:
-        return run(f'dotnet build {settings.solution}')
+        return run(
+            f'dotnet build {settings.solution}',
+            ' > /dev/null' if settings.hide else ''
+        )
     return 0
 
 
@@ -29,7 +32,8 @@ def inspectcode(settings):
         f'--include={";".join(settings.include)}' if settings.include else '',
         f'--exclude={";".join(settings.exclude)}' if settings.exclude else '',
         f'--severity={settings.severity}' if settings.severity else '',
-        '-o=inspection.xml'
+        '-o=inspection.xml > /dev/null',
+        ' > /dev/null' if settings.hide else ''
     )
 
 
@@ -108,6 +112,7 @@ def settings_object_hook(d):
     x['discard_issues'] = split_scsv(get(d, 'discard-issues'))
     x['severity'] = get(d, 'severity')
     x['build'] = get(d, 'build', True)
+    x['hide'] = get(d, 'hide-output', True)
     return dict_to_obj('settings', x)
 
 

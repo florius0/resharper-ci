@@ -25,6 +25,10 @@ inputs:
     description: "Should project be builded before checks, defaults to true"
     required: false
     default: "true"
+  hide-output:
+    description: "Hides output of build ('dotnet build') and resharper ('jb inspectcode ...')"
+    required: false
+    default: "true"
 
 runs:
   using: "docker"
@@ -36,5 +40,6 @@ runs:
         "include": "${{ inputs.include }}",
         "exclude": "${{ inputs.exclude }}",
         "discard-issues": "${{ inputs.discard-issues }}",
-        "build": "${{ inputs.build }}"
+        "build": "${{ inputs.build }}",
+        "hide-output": "${{ inputs.hide-output }}"
       }'
