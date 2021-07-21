@@ -29,10 +29,11 @@ def inspectcode(settings):
     return run(
         'jb inspectcode',
         settings.solution,
-        f'--include={";".join(settings.include)}' if settings.include else '',
-        f'--exclude={";".join(settings.exclude)}' if settings.exclude else '',
-        f'--severity={settings.severity}' if settings.severity else '',
-        '-o=inspection.xml > /dev/null',
+        f'--include="{";".join(settings.include)}"' if settings.include else '',
+        f'--exclude="{";".join(settings.exclude)}"' if settings.exclude else '',
+        f'--severity="{settings.severity}"' if settings.severity else '',
+        f'--profile="{settings.profile}"' if settings.profile else '',
+        '-o="inspection.xml"',
         ' > /dev/null' if settings.hide else ''
     )
 
@@ -110,9 +111,10 @@ def settings_object_hook(d):
     x['include'] = split_scsv(get(d, 'include'))
     x['exclude'] = split_scsv(get(d, 'exclude'))
     x['discard_issues'] = split_scsv(get(d, 'discard-issues'))
-    x['severity'] = get(d, 'severity')
+    x['severity'] = get(d, 'severity', 'WARNING')
     x['build'] = get(d, 'build', True)
     x['hide'] = get(d, 'hide-output', True)
+    x['profile'] = get(d, 'profile')
     return dict_to_obj('settings', x)
 
 
