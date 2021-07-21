@@ -1,6 +1,6 @@
 name: "Resharper CI"
 author: "florius"
-description: "An action that runs the ReSharper inspectcode and dupfinder tools"
+description: "An action that runs the ReSharper inspectcode tool"
 branding:
   icon: "hash"
   color: "purple"
