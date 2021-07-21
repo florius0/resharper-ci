@@ -8,6 +8,9 @@ inputs:
   solution:
     description: "Path to your solution file, ex: MyProject.sln"
     required: true
+  profile:
+    description: "Path to your .DotSettings file"
+    required: false
   severity:
     description: "Set minimal reported severity level to [INFO, HINT, SUGGESTION, WARNING, ERROR]. Default to WARNING"
     default: "WARNING"
@@ -36,6 +39,7 @@ runs:
   args:
     - '{
         "solution": "${{ inputs.solution }}",
+        "profile": "${{ inputs.profile }}",
         "severity": "${{ inputs.severity }}",
         "include": "${{ inputs.include }}",
         "exclude": "${{ inputs.exclude }}",

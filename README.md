@@ -8,6 +8,10 @@ This action runs JetBrains Resharper InspectCode, prints human-readable output a
 
   **Required** Path to your solution file, e.g. MyProject.sln"
 
+### `profile`
+
+  Path to your `.DotSettings` file
+
 ### `severity`
 
   Set minimal reported severity level to [INFO, HINT, SUGGESTION, WARNING, ERROR]. Default to WARNING
@@ -36,7 +40,8 @@ This action runs JetBrains Resharper InspectCode, prints human-readable output a
 
 ## Example
 
-```name: InspectMaster
+```yaml
+name: InspectMaster
 
 on:
   push:
